@@ -1,0 +1,81 @@
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+       <div class="consulta">
+         <form [formGroup]="formGroup" (ngSubmit)="carregarClima(formGroup.value)">
+           <div class="row">
+             <div class="col-9">
+               <div class="form-group">
+                 <input
+                   class="form-control"
+                   type="text"
+                   id="localClima"
+                   aria-describedby="weatherLocation"
+                   placeholder="Digite a cidade que deseja consultar o tempo?"
+                   formControlName="location"
+                 />
+               </div>
+             </div>
+             <div class="col-3">
+               <div class="text-center">
+                 <button type="submit" class="btn btn-success">
+                   Consultar
+                 </button>
+               </div>
+             </div>
+           </div>
+         </form>
+       </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-md-6 boxDetalhes">
+      <h3 class="text-center my-2">Detalhes do Local </h3>
+      <table class="table table-responsive">
+        <tr>
+          <td>
+            <span class="imagemTemperatura">
+              <img [src]="resultado.current.weather_icons[0]" alt="">
+            </span>
+          </td>
+          <td>
+            <span class="temperatura">
+              {{ resultado.current.temperature }}º
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Precipitação / Humidade</strong></td>
+          <td>{{ resultado.current.precip }}% / {{ resultado.current.humidity }}%</td>
+        </tr>
+        <tr>
+          <td><strong>País / Estado / Cidade</strong></td>
+          <td>{{ resultado.location.country}}/{{ resultado.location.region}}/{{ resultado.location.name}}</td>
+        </tr>
+        <tr>
+          <td><strong>Data Consulta</strong></td>
+          <td>{{ resultado.location.localtime}}</td>
+        </tr>
+        <tr>
+          <td><strong>Velocidade Vento / Sentido</strong></td>
+          <td>{{ resultado.current.wind_speed }} km/h / {{ resultado.current.wind_dir }}</td>
+        </tr>
+      </table>
+      <div class="jsonCompleto">
+        <small (click)="repostaCompleta = !repostaCompleta">resposta completa</small>
+        <div *ngIf="repostaCompleta">
+          {{ resultado | json}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+
+</footer>
